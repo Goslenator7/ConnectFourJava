@@ -4,6 +4,6 @@ public class Space {
 
     private boolean chip;
     private char chipColour;
-    //private ArrayList<RedChip> redChips = new ArrayList<>();
-    //private ArrayList<YellowChip> yellowChips = new ArrayList<>();
+    private ArrayList<Chip> chips = new ArrayList<>();
+
 }
