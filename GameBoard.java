@@ -14,22 +14,24 @@ public class GameBoard {
     //Constructor
     public GameBoard(String name) {
         this.name = name;
+        this.columnDimensions();
+        this.rowDimensions();
     }
 
-    // Ask the user for the number of columns they would like
-    public int columnDimensions() {
+    // Ask the user for the number of columns they would like and set it
+    public void columnDimensions() {
         int numOfColumns;
 
         numOfColumns = Integer.parseInt(JOptionPane.showInputDialog("Please enter the number of columns you want on the board: "));
-        return numOfColumns;
+        setNumOfColumns(numOfColumns);
     }
 
-    // Ask the user for the number of rows they would like
-    public int rowDimensions() {
+    // Ask the user for the number of rows they would like and use set method to set it
+    public void rowDimensions() {
         int numOfRows;
 
         numOfRows = Integer.parseInt(JOptionPane.showInputDialog("Please enter the number of rows you want on the board: "));
-        return numOfRows;
+        setNumOfRows(numOfRows);
     }
 
     // Getters and Setters
@@ -51,10 +53,12 @@ public class GameBoard {
         this.numOfRows = numOfRows;
     }
 
+    // Get the number of columns from rowDimensions() input
     public int getNumOfColumns() {
         return this.numOfColumns;
     }
 
+    // Set the numOfColumns equal to columnDimensions() input
     public void setNumOfColumns(int numOfColumns) {
         this.numOfColumns = numOfColumns;
     }
