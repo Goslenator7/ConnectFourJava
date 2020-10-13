@@ -34,6 +34,16 @@ public class GameBoard {
         setNumOfRows(numOfRows);
     }
 
+    // Add a row to the rows array list
+    public void addRows(Row row) {
+        this.rows.add(row);
+    }
+
+    // Add a column to the columns array list
+    public void addColumns(Column column) {
+        this.columns.add(column);
+    }
+
     // Getters and Setters
     public String getName() {
         return name;
