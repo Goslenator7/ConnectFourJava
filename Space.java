@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Space {
 
-    private boolean chip;
-    // private char chipColour; Here or in Chip class?
+    private char chip; //can be set to R or Y
+    private boolean empty;
 
 }

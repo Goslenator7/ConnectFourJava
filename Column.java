@@ -9,6 +9,11 @@ public class Column {
         this.columnNumber = columnNumber;
     }
 
+    // Add space to list of column spaces
+    public void addSpace(Space space) {
+        this.columnSpaces.add(space);
+    }
+
     // Getters and Setters
     public int getColumnNumber() {
         return columnNumber;
