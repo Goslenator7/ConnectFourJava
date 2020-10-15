@@ -20,19 +20,20 @@ public class Player {
     }
 
     // Ask the player which colour they would like to play as
+    // Result will determine the colour of other player, decided during runtime in main
     public void playerColour() {
-        String playerColour;
+        String playersColour;
 
-        playerColour = JOptionPane.showInputDialog("Okay, does "+getPlayerName()+" want to be red or yellow?");
+        playersColour = JOptionPane.showInputDialog("Okay, does "+getPlayerName()+" want to be R (red) or Y (yellow?)");
 
         // For some reason, it would not accept these as chained || statements, so had to do them this way
-        if (playerColour == "red") {
+        if (playersColour.equals("red")) {
             setPlayerColour('R');
         }
-        else if (playerColour == "Red") {
+        else if (playersColour.equals("Red")) {
             setPlayerColour('R');
         }
-        else if (playerColour == "R") {
+        else if (playersColour.equals("R")) {
             setPlayerColour('R');
         }
         else {
