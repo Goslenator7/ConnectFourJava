@@ -11,17 +11,21 @@ public class PlayGame {
 
     public static void main(String[] args) {
 
+        // Display welcome message
         PlayGame.welcome();
 
         // Create new game instance
         GameBoard newGame = new GameBoard("Connect Four");
 
+        // Create two new players
         Player player1 = new Player();
         Player player2 = new Player();
 
+        // Ask each player for their name
         player1.playerName();
         player2.playerName();
 
+        // Ask player 1 to select a colour
         player1.playerColour();
 
         // Set player 2's colour to the option player 1 does not pick
@@ -32,12 +36,15 @@ public class PlayGame {
             player2.setPlayerColour('R');
         }
 
+        //
+        // Test to show assignment of player name and colours. Can be removed for demo
+        //
         String message = player1.getPlayerName()+" is "+player1.getPlayerColour()+". "+player2.getPlayerName()+" is "+player2.getPlayerColour()+".";
         JOptionPane.showMessageDialog(null, message);
 
-        // Method to start the game //main?
-        // Ask for names of players
-        // Ask player one which colour of chip they want
+        // Method to start the game //main? Done
+        // Ask for names of players Done
+        // Ask player one which colour of chip they want Done
         // Ask player for column number to place chip
         // Update the space of that row/column to have a chip in it (or put it one row up if already full)
         // OR tell the player that row is already full and ask for a different column to place

@@ -2,16 +2,21 @@ import java.util.ArrayList;
 
 public class Space {
 
-    private char chip; //can be set to 'R' or 'Y' to signify red or yellow chip
+    private Chip chip; //will be 'R' or 'Y' in colour to signify red or yellow chip
     private boolean empty; // will either be true, if chip is already placed there, or false, if no chip there
 
+    // Constructor
+    public Space(Chip chip, boolean empty) {
+        setChip(chip);
+        setEmpty(empty);
+    }
 
     // Getters and Setters
-    public char getChip() {
+    public Chip getChip() {
         return this.chip;
     }
 
-    public void setChip(char chip) {
+    public void setChip(Chip chip) {
         this.chip = chip;
     }
 

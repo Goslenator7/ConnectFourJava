@@ -5,6 +5,7 @@ public class Column {
     private int columnNumber;
     private ArrayList<Space> columnSpaces = new ArrayList<Space>();
 
+    // Constructor
     public Column(int columnNumber) {
         this.columnNumber = columnNumber;
     }

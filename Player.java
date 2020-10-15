@@ -26,7 +26,6 @@ public class Player {
 
         playersColour = JOptionPane.showInputDialog("Okay, does "+getPlayerName()+" want to be R (red) or Y (yellow?)");
 
-        // For some reason, it would not accept these as chained || statements, so had to do them this way
         if (playersColour.equals("red")) {
             setPlayerColour('R');
         }
@@ -39,7 +38,16 @@ public class Player {
         else {
             setPlayerColour('Y');
         }
-        // Can set the next player to a different colour once player objects have been created in main?
+    }
+
+    // Ask the user for a column to place their chip in
+    public void placeAChip() {
+        int columnChoice;
+
+        columnChoice = Integer.parseInt(JOptionPane.showInputDialog("Which column number would you like to place your chip in?"));
+
+        //activate addChipToSpace method in space class accepting integer of column choice?
+        //Or select column number equal to input and update that space and the rowSpace as well?
     }
 
     // Getters and Setters
