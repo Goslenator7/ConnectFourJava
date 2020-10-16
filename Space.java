@@ -6,8 +6,7 @@ public class Space {
     private boolean empty; // will either be true, if chip is already placed there, or false, if no chip there
 
     // Constructor
-    public Space(Chip chip, boolean empty) {
-        setChip(chip);
+    public Space(boolean empty) {
         setEmpty(empty);
     }
 

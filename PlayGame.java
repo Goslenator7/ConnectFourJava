@@ -15,8 +15,10 @@ public class PlayGame {
         PlayGame.welcome();
 
         // Create new game instance
-        GameBoard newGame = new GameBoard("Connect Four");
+        GameBoard newGame = new GameBoard(6,7);
 
+        // Test if the rows have been added successfully
+        System.out.println(newGame.getRows().size());
 
         // Create two new players
         Player player1 = new Player();
