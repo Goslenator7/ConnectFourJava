@@ -10,6 +10,11 @@ public class Space {
         setEmpty(empty);
     }
 
+    // Method called when a chip is added, switches space chip status to false (filled)
+    public void chipIsAdded() {
+        setEmpty(false);
+    }
+
     // Getters and Setters
     public Chip getChip() {
         return this.chip;
