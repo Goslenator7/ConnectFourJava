@@ -17,6 +17,7 @@ public class PlayGame {
         // Create new game instance
         GameBoard newGame = new GameBoard("Connect Four");
 
+
         // Create two new players
         Player player1 = new Player();
         Player player2 = new Player();

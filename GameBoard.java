@@ -8,7 +8,6 @@ public class GameBoard {
     private final int NUMOFCOLUMNS = 6;
     // Generate arraylists with the num of rows and columns from method
     private ArrayList<Row> rows = new ArrayList<Row>();
-    private ArrayList<Column> columns = new ArrayList<Column>();
 
 
     //Constructor
@@ -35,11 +34,6 @@ public class GameBoard {
     // Add a row to the rows array list
     public void addRows(Row row) {
         this.rows.add(row);
-    }
-
-    // Add a column to the columns array list
-    public void addColumns(Column column) {
-        this.columns.add(column);
     }
 
     // Getters and Setters
