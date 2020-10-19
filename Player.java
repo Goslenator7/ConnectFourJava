@@ -3,7 +3,7 @@ import javax.swing.*;
 public class Player {
 
     private String playerName;
-    private char playerColour;
+    private String playerColour;
 
     //Constructor
     public Player() {
@@ -27,16 +27,16 @@ public class Player {
         playersColour = JOptionPane.showInputDialog("Okay, does "+getPlayerName()+" want to be R (red) or Y (yellow?)");
 
         if (playersColour.equals("red")) {
-            setPlayerColour('R');
+            setPlayerColour("R");
         }
         else if (playersColour.equals("Red")) {
-            setPlayerColour('R');
+            setPlayerColour("R");
         }
         else if (playersColour.equals("R")) {
-            setPlayerColour('R');
+            setPlayerColour("R");
         }
         else {
-            setPlayerColour('Y');
+            setPlayerColour("Y");
         }
     }
 
@@ -58,11 +58,11 @@ public class Player {
         this.playerName = playerName;
     }
 
-    public char getPlayerColour() {
+    public String getPlayerColour() {
         return playerColour;
     }
 
-    public void setPlayerColour(char playerColour) {
+    public void setPlayerColour(String playerColour) {
         this.playerColour = playerColour;
     }
 

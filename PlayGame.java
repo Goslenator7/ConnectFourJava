@@ -32,21 +32,21 @@ public class PlayGame {
         player1.playerColour();
 
         // Set player 2's colour to the option player 1 does not pick
-        if (player1.getPlayerColour() == 'R') {
-            player2.setPlayerColour('Y');
+        if (player1.getPlayerColour() == "R") {
+            player2.setPlayerColour("Y");
         }
         else {
-            player2.setPlayerColour('R');
+            player2.setPlayerColour("R");
         }
-
-        // Player one picks a column number to place a chip
-        player1.playerChoice();
 
         //
         // Test to show assignment of player name and colours. Can be removed for demo
         //
         String message = player1.getPlayerName()+" is "+player1.getPlayerColour()+". "+player2.getPlayerName()+" is "+player2.getPlayerColour()+".";
         JOptionPane.showMessageDialog(null, message);
+
+        // Player one picks a column number to place a chip
+        player1.playerChoice();
 
         // Method to start the game //main? Done
         // Ask for names of players Done

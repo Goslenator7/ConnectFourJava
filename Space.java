@@ -10,17 +10,19 @@ public class Space {
         setEmpty(empty);
     }
 
-    // Method called when a chip is added, switches space chip status to false (filled)
-    public void chipIsAdded() {
-        setEmpty(false);
+    // Once a chip is added, set the space empty to false and chipColour to player's colour
+    public void addChip(int columnChoice) {
+        if (this.getEmpty() == true) {
+            this.setChipColour(new Player().getPlayerColour());
+        }
     }
 
     // Getters and Setters
-    public String chipColour() {
+    public String getChipColour() {
         return this.chipColour;
     }
 
-    public void setChip(String chipColour) {
+    public void setChipColour(String chipColour) {
         this.chipColour = chipColour;
     }
 
