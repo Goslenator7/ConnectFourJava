@@ -2,10 +2,10 @@ import java.util.ArrayList;
 
 public class Space {
 
-    private Chip chip; //will be 'R' or 'Y' in colour to signify red or yellow chip
+    private String chipColour; //will be 'R', 'Y' OR 'NA' in colour to signify red, yellow or no chip
     private boolean empty; // will either be true, if chip is already placed there, or false, if no chip there
 
-    // Constructor
+    // Constructor (Sets to empty by default)
     public Space(boolean empty) {
         setEmpty(empty);
     }
@@ -16,12 +16,12 @@ public class Space {
     }
 
     // Getters and Setters
-    public Chip getChip() {
-        return this.chip;
+    public String chipColour() {
+        return this.chipColour;
     }
 
-    public void setChip(Chip chip) {
-        this.chip = chip;
+    public void setChip(String chipColour) {
+        this.chipColour = chipColour;
     }
 
     public boolean getEmpty() {

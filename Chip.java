@@ -1,18 +1,18 @@
 public class Chip {
 
-    private char chipColour;
+    private String chipColour;
 
     // Constructor
-    public Chip(char chipColour) {
+    public Chip(String chipColour) {
         setChipColour(chipColour);
     }
 
     // Getters and setters
-    public char getChipColour() {
+    public String getChipColour() {
         return this.chipColour;
     }
 
-    public void setChipColour(char chipColour) {
+    public void setChipColour(String chipColour) {
         this.chipColour = chipColour;
     }
 }

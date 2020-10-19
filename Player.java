@@ -41,13 +41,12 @@ public class Player {
     }
 
     // Ask the user for a column to place their chip in
-    public void placeAChip() {
+    public int playerChoice() {
         int columnChoice;
 
         columnChoice = Integer.parseInt(JOptionPane.showInputDialog("Which column number would you like to place your chip in?"));
-
+        return columnChoice;
         //activate addChipToSpace method in space class accepting integer of column choice?
-        //Or select column number equal to input and update that space and the rowSpace as well?
     }
 
     // Getters and Setters

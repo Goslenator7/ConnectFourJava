@@ -39,6 +39,9 @@ public class PlayGame {
             player2.setPlayerColour('R');
         }
 
+        // Player one picks a column number to place a chip
+        player1.playerChoice();
+
         //
         // Test to show assignment of player name and colours. Can be removed for demo
         //
@@ -48,7 +51,7 @@ public class PlayGame {
         // Method to start the game //main? Done
         // Ask for names of players Done
         // Ask player one which colour of chip they want Done
-        // Ask player for column number to place chip
+        // Ask player for column number to place chip Done
         // Update the space of that row/column to have a chip in it (or put it one row up if already full)
         // OR tell the player that row is already full and ask for a different column to place
         // Check surroundings of that chip to see if there are any matches
