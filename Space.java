@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Space {
@@ -6,8 +7,10 @@ public class Space {
     private boolean empty; // will either be true, if chip is already placed there, or false, if no chip there
 
     // Constructor (Sets to empty by default)
-    public Space(boolean empty) {
+    public Space(String chipColour, boolean empty) {
         setEmpty(empty);
+        // Default
+        setChipColour("NA");
     }
 
     // Once a chip is added, set the space empty to false and chipColour to player's colour

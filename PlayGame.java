@@ -25,7 +25,7 @@ public class PlayGame {
             System.out.print("");
             //"\t"+tempRow.getRowSpaces().size()
             for (Space tempSpace : tempRow.getRowSpaces()) {
-                System.out.print(1);
+                System.out.print(tempSpace.getChipColour()+"\t");
             }
             System.out.print("\n");
         }

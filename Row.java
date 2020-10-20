@@ -8,7 +8,7 @@ public class Row {
     // Constructor which adds rowSpaces to the Row equal to NUMOFCOLUMNS variable
     public Row(int NUMOFCOLUMNS) {
         for (int i = 0; i < NUMOFCOLUMNS+1; i++) {
-            Space tempSpace = new Space(true);
+            Space tempSpace = new Space("NA", true);
             this.rowSpaces.add(tempSpace);
         }
     }

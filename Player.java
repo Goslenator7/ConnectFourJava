@@ -44,7 +44,7 @@ public class Player {
     public int playerChoice() {
         int columnChoice;
 
-        columnChoice = Integer.parseInt(JOptionPane.showInputDialog("Which column number would you like to place your chip in?"));
+        columnChoice = Integer.parseInt(JOptionPane.showInputDialog(this.getPlayerName()+", which column number would you like to place your chip in?"));
         return columnChoice;
         //activate addChipToSpace method in space class accepting integer of column choice?
     }
