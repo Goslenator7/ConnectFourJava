@@ -20,6 +20,16 @@ public class PlayGame {
         // Test if the rows have been added successfully
         System.out.println(newGame.getRows().size());
 
+        // Test number of spaces in each row
+        for (Row tempRow : newGame.getRows()) {
+            System.out.print("");
+            //"\t"+tempRow.getRowSpaces().size()
+            for (Space tempSpace : tempRow.getRowSpaces()) {
+                System.out.print(1);
+            }
+            System.out.print("\n");
+        }
+
         // Create two new players
         Player player1 = new Player();
         Player player2 = new Player();
