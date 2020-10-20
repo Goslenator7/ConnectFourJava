@@ -1,4 +1,3 @@
-package ConnectFour;
 import javax.swing.*;
 
 public class Player {
