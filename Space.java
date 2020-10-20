@@ -1,3 +1,4 @@
+package ConnectFour;
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -14,9 +15,9 @@ public class Space {
     }
 
     // Once a chip is added, set the space empty to false and chipColour to player's colour
-    public void addChip(int columnChoice) {
+    public void addChip(String playerColour, int columnChoice) {
         if (this.getEmpty() == true) {
-            this.setChipColour(new Player().getPlayerColour());
+            this.setChipColour(playerColour);
         }
     }
 

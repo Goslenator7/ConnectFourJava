@@ -1,3 +1,4 @@
+package ConnectFour;
 public class Chip {
 
     private String chipColour;
