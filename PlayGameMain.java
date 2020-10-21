@@ -12,10 +12,11 @@ public class PlayGameMain {
     public static void main(String[] args) {
 
         // Display welcome message
-        PlayGameMain.welcome();
+        welcome();
 
         // Create new game instance
         GameBoard newGame = new GameBoard(6,7);
+
 
         /*// Test if the rows have been added successfully
         System.out.println(newGame.getRows().size());
