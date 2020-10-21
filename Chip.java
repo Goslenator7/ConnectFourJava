@@ -2,7 +2,8 @@ public class Chip {
 
     private String chipColour;
 
-    // Constructor
+    // Constructors
+    public Chip() {}
     public Chip(String chipColour) {
         setChipColour(chipColour);
     }
