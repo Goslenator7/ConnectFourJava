@@ -16,7 +16,8 @@ public class PlayGameMain {
 
         // Create new game instance
         GameBoard newGame = new GameBoard(6,7);
-
+        GameLogic aNewGame = new GameLogic();
+        aNewGame.startGame();
 
         /*// Test if the rows have been added successfully
         System.out.println(newGame.getRows().size());

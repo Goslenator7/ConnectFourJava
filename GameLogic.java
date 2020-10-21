@@ -8,6 +8,13 @@ public class GameLogic {
     private final int NUMOFROWS = 6;
     private final int NUMOFCOLUMNS = 7;
 
+    // Start the Game
+    public void startGame() {
+        playerNames();
+        playerColours();
+        playerOneChoice();
+    }
+
     //
     //
     // Game Setup
@@ -30,13 +37,13 @@ public class GameLogic {
 
         playerOneColour = JOptionPane.showInputDialog("Okay, does "+playerOneName+" want to be red or yellow?");
 
-        if (playerOneColour == "red" || playerOneColour == "Red" || playerOneColour == "R" || playerOneColour == "r") {
+        if (playerOneColour.equals("red") || playerOneColour.equals("Red") || playerOneColour.equals("R") || playerOneColour.equals("r")) {
             playerOneColour = "Red";
             playerTwoColour = "Yellow";
             playersColours = playerOneName+" is red. "+playerTwoName+" is yellow.";
             JOptionPane.showMessageDialog(null, playersColours, "Your colours", JOptionPane.INFORMATION_MESSAGE);
         }
-        else if (playerOneColour == "yellow" || playerOneColour == "Yellow" || playerOneColour == "Y" || playerOneColour == "y") {
+        else if (playerOneColour.equals("yellow") || playerOneColour.equals("Yellow") || playerOneColour.equals("Y") || playerOneColour.equals("y")) {
             playerOneColour = "Yellow";
             playerTwoColour = "Red";
             playersColours = playerOneName+" is yellow. "+playerTwoName+" is red.";
