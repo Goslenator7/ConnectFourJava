@@ -10,9 +10,23 @@ public class GameLogic {
 
     // Start the Game
     public void startGame() {
+        GameBoard newGame = new GameBoard(6,7);
         playerNames();
         playerColours();
         playerOneChoice();
+
+        // Test if the rows have been added successfully
+        System.out.println(newGame.getRows().size());
+
+        // Test number of spaces in each row
+        for (Row tempRow : newGame.getRows()) {
+            System.out.print("");
+            //"\t"+tempRow.getRowSpaces().size()
+            for (Space tempSpace : tempRow.getRowSpaces()) {
+                System.out.print(tempSpace.getChip()+"\t");
+            }
+            System.out.print("\n");
+        }
     }
 
     //

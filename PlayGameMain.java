@@ -15,7 +15,6 @@ public class PlayGameMain {
         welcome();
 
         // Create new game instance
-        GameBoard newGame = new GameBoard(6,7);
         GameLogic aNewGame = new GameLogic();
         aNewGame.startGame();
 
