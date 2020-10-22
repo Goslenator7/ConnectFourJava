@@ -15,7 +15,7 @@ public class GameBoard {
 
     // Getter for list of rows
     public ArrayList<Row> getRows() {
-        return rows;
+        return this.rows;
     }
 
 }
