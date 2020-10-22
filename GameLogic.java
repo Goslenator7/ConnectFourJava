@@ -184,7 +184,16 @@ public class GameLogic {
         System.out.println(rowContents);
     }
 
-    // Activate if column counter reaches 7 (NUMOFCOLUMNS) to declare draw since no other moves are possible
+    public void verticalCheckForMatch(int theDefaultRow, int thePlayerChoice, String thePlayerColour) {
+
+    }
+
+    public void diagonalCheckForMatch(int theDefaultRow, int thePlayerChoice, String thePlayerColour) {
+        
+    }
+
+
+        // Activate if column counter reaches 7 (NUMOFCOLUMNS) to declare draw since no other moves are possible
     public void gameDraw() {
     }
 
