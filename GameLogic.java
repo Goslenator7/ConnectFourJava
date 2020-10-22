@@ -112,13 +112,13 @@ public class GameLogic {
     // Repeat this process until default row is 0 (top of the board is reached)
     // At this point, tell the player that column is full, and call the method to pick another number using their playerNumber
     public void checkIfChoiceIsFull(int thePlayerChoice, String playerColour, int playerNumber) {
-        int defaultRow = 6;
+        int defaultRow = newGame.getRows().size();
 
         if (newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).getEmpty() == true) {
             newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).addChip(playerColour);
         }
         else {
-            while (defaultRow >= 0) {
+            while (defaultRow > 0) {
                 defaultRow -= 1;
                 if (newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).getEmpty() == true) {
                     newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).addChip(playerColour);
@@ -137,9 +137,6 @@ public class GameLogic {
         }
     }
 
-    public GameBoard getNewGame() {
-        return newGame;
-    }
 
     //
     //
@@ -185,6 +182,10 @@ public class GameLogic {
 
     public int getNUMOFCOLUMNS() {
         return NUMOFCOLUMNS;
+    }
+
+    public GameBoard getNewGame() {
+        return newGame;
     }
 
     public void setNewGame(GameBoard newGame) {
