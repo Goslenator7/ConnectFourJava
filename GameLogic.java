@@ -151,7 +151,7 @@ public class GameLogic {
                     break;
 
                 }
-                // Triggers when defaultRow 0 is reached and the column(user's chosen space) is full
+                // Triggers when defaultRow 0 (top row) is reached and the column(user's chosen space) is full
                 if (defaultRow == 0 && newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice - 1).getEmpty() == false) {
                     fullColumnCounter += 1;
                     // If fullColumnCounter = 7, call the gameDraw method? (to be added)
@@ -177,21 +177,11 @@ public class GameLogic {
         for (Space tempSpace : newGame.getRows().get(theDefaultRow).getRowSpaces()) {
             rowContents = rowContents + tempSpace.whatIsInTheSpace();
         }
-
-        System.out.println(rowContents);
-
-        //rowContents = rowContents + newGame.getRows().get(theDefaultRow).getRowSpaces().get(rowSpace).whatIsInTheSpace();
-
-        // Loop until we reach the end of the row
-        /*while (rowSpace < newGame.getRows().get(theDefaultRow).getRowSpaces().size() - 1) {
-            rowContents = rowContents + newGame.getRows().get(theDefaultRow).getRowSpaces().get(rowSpace).whatIsInTheSpace();
-            rowSpace++;
-        }
-        System.out.println(rowContents);
         if (rowContents.contains("RRRR") || rowContents.contains("YYYY")) {
-            // Run playerWins(playerColour)
             JOptionPane.showMessageDialog(null, thePlayerColour+" wins!");
-        }*/
+        }
+
+        System.out.println(rowContents);
     }
 
     // Activate if column counter reaches 7 (NUMOFCOLUMNS) to declare draw since no other moves are possible
