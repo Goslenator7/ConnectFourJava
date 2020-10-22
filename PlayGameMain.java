@@ -15,8 +15,8 @@ public class PlayGameMain {
         welcome();
 
         // Create new game instance
-        GameLogic aNewGame = new GameLogic();
-        aNewGame.startGame();
+        GameLogic newGame = new GameLogic();
+        newGame.startGame();
 
         // Method to start the game //main? Done
         // Ask for names of players Done

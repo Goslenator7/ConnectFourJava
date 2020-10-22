@@ -9,7 +9,8 @@ public class GameLogic {
     private final int NUMOFROWS = 6;
     private final int NUMOFCOLUMNS = 7;
     private int fullColumnCounter = 0;
-    GameBoard newGame = new GameBoard(6,7);
+
+    GameBoard newGame = new GameBoard(getNUMOFROWS(), getNUMOFCOLUMNS());
 
 
     //
@@ -21,15 +22,19 @@ public class GameLogic {
 
     // Start the Game
     public void startGame() {
+        setNewGame(newGame);
         playerNames();
         playerColours();
         // Should start the loop to play the game here!
         playerOneChoice();
+        playerTwoChoice();
 
-        // Test if the rows have been added successfully
+
+        /*// Test if the rows have been added successfully
         System.out.println(newGame.getRows().size());
 
         // Test number of spaces in each row
+
         for (Row tempRow : newGame.getRows()) {
             System.out.print("");
             //"\t"+tempRow.getRowSpaces().size()
@@ -37,7 +42,20 @@ public class GameLogic {
                 System.out.print(tempSpace.getChip()+"\t");
             }
             System.out.print("\n");
+        }*/
+    }
+
+    // Displays the current layout of the board
+    public void displayBoard() {
+        for (Row tempRow : newGame.getRows()) {
+            System.out.print("");
+            //"\t"+tempRow.getRowSpaces().size()
+            for (Space tempSpace : tempRow.getRowSpaces()) {
+                System.out.print(tempSpace.getChip().getChipColour() + "\t");
+            }
+            System.out.print("\n");
         }
+        System.out.println("\n");
     }
 
     //
@@ -114,21 +132,24 @@ public class GameLogic {
     // At this point, if space in row 0 is full tell the player that column is full
     // and call the method to pick another column number using their playerNumber
     public void checkIfChoiceIsFull(int thePlayerChoice, String playerColour, int playerNumber) {
-        int defaultRow = newGame.getRows().size();
+        int defaultRow = newGame.getRows().size() - 1;
 
-        if (newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).getEmpty() == true) {
-            newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).addChip(playerColour);
-            horizontalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
+        if (newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice - 1).getEmpty() == true) {
+            newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice - 1).addChip(playerColour);
+            displayBoard();
+            //horizontalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
         }
         else {
             while (defaultRow > 0) {
                 defaultRow -= 1;
-                if (newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).getEmpty() == true) {
-                    newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).addChip(playerColour);
-                    horizontalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
+                if (newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice - 1).getEmpty() == true) {
+                    newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice - 1).addChip(playerColour);
+                    displayBoard();
+                    break;
+                    //horizontalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
                 }
                 // Triggers when defaultRow 0 is reached and the column(user's chosen space) is full
-                if (defaultRow == 0 && newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).getEmpty() == false) {
+                if (defaultRow == 0 && newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice - 1).getEmpty() == false) {
                     fullColumnCounter += 1;
                     // If fullColumnCounter = 7, call the gameDraw method? (to be added)
                     String columnFullMessage = "Sorry, looks like that column is full. Please pick another column";
