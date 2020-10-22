@@ -8,6 +8,7 @@ public class GameLogic {
     private String playerTwoColour;
     private final int NUMOFROWS = 6;
     private final int NUMOFCOLUMNS = 7;
+    private int fullColumnCounter = 0;
     GameBoard newGame = new GameBoard(6,7);
 
 
@@ -61,14 +62,14 @@ public class GameLogic {
         playerOneColour = JOptionPane.showInputDialog("Okay, does "+playerOneName+" want to be red or yellow?");
 
         if (playerOneColour.equals("red") || playerOneColour.equals("Red") || playerOneColour.equals("R") || playerOneColour.equals("r")) {
-            playerOneColour = "Red";
-            playerTwoColour = "Yellow";
+            playerOneColour = "R";
+            playerTwoColour = "Y";
             playersColours = playerOneName+" is red. "+playerTwoName+" is yellow.";
             JOptionPane.showMessageDialog(null, playersColours, "Your colours", JOptionPane.INFORMATION_MESSAGE);
         }
         else if (playerOneColour.equals("yellow") || playerOneColour.equals("Yellow") || playerOneColour.equals("Y") || playerOneColour.equals("y")) {
-            playerOneColour = "Yellow";
-            playerTwoColour = "Red";
+            playerOneColour = "Y";
+            playerTwoColour = "R";
             playersColours = playerOneName+" is yellow. "+playerTwoName+" is red.";
             JOptionPane.showMessageDialog(null, playersColours, "Your colours", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -110,20 +111,26 @@ public class GameLogic {
     // Check the player's chosen space on the row (their chosen column number) to see if empty or not
     // If it is empty, place a chip of their colour. Otherwise, minus one from the default row to move a row up on the board
     // Repeat this process until default row is 0 (top of the board is reached)
-    // At this point, tell the player that column is full, and call the method to pick another number using their playerNumber
+    // At this point, if space in row 0 is full tell the player that column is full
+    // and call the method to pick another column number using their playerNumber
     public void checkIfChoiceIsFull(int thePlayerChoice, String playerColour, int playerNumber) {
         int defaultRow = newGame.getRows().size();
 
         if (newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).getEmpty() == true) {
             newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).addChip(playerColour);
+            horizontalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
         }
         else {
             while (defaultRow > 0) {
                 defaultRow -= 1;
                 if (newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).getEmpty() == true) {
                     newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).addChip(playerColour);
+                    horizontalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
                 }
+                // Triggers when defaultRow 0 is reached and the column(user's chosen space) is full
                 if (defaultRow == 0 && newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).getEmpty() == false) {
+                    fullColumnCounter += 1;
+                    // If fullColumnCounter = 7, call the gameDraw method? (to be added)
                     String columnFullMessage = "Sorry, looks like that column is full. Please pick another column";
                     JOptionPane.showMessageDialog(null, columnFullMessage, "Column Full", JOptionPane.ERROR_MESSAGE);
                     if (playerNumber == 1) {
@@ -136,6 +143,30 @@ public class GameLogic {
             }
         }
     }
+
+    // Check the row that the player just placed on to see if there are 4 of their colours in a row
+    public void horizontalCheckForMatch(int theDefaultRow, int thePlayerChoice, String thePlayerColour) {
+
+        String rowContents = "";
+        int rowSpace = 0;
+
+        rowContents = rowContents + newGame.getRows().get(theDefaultRow).getRowSpaces().get(rowSpace).whatIsInTheSpace();
+
+        // Loop until we reach the end of the row
+        while (rowSpace < newGame.getRows().get(theDefaultRow).getRowSpaces().size()) {
+            rowSpace += 1;
+            rowContents = rowContents + newGame.getRows().get(theDefaultRow).getRowSpaces().get(rowSpace).whatIsInTheSpace();
+        }
+        if (rowContents.contains(thePlayerColour+thePlayerColour+thePlayerColour+thePlayerColour)) {
+            // Run playerWins(playerColour)
+        }
+    }
+
+    // Activate if column counter reaches 7 (NUMOFCOLUMNS) to declare draw since no other moves are possible
+    public void gameDraw() {
+    }
+
+
 
 
     //
@@ -182,6 +213,14 @@ public class GameLogic {
 
     public int getNUMOFCOLUMNS() {
         return NUMOFCOLUMNS;
+    }
+
+    public int getFullColumnCounter() {
+        return fullColumnCounter;
+    }
+
+    public void setFullColumnCounter(int fullColumnCounter) {
+        this.fullColumnCounter = fullColumnCounter;
     }
 
     public GameBoard getNewGame() {
