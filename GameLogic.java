@@ -26,8 +26,10 @@ public class GameLogic {
         playerNames();
         playerColours();
         // Should start the loop to play the game here!
-        playerOneChoice();
-        playerTwoChoice();
+        for (int i = 0; i < 7; i++) {
+            playerOneChoice();
+            playerTwoChoice();
+        }
 
 
         /*// Test if the rows have been added successfully
@@ -137,7 +139,7 @@ public class GameLogic {
         if (newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice - 1).getEmpty() == true) {
             newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice - 1).addChip(playerColour);
             displayBoard();
-            //horizontalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
+            horizontalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
         }
         else {
             while (defaultRow > 0) {
@@ -145,14 +147,15 @@ public class GameLogic {
                 if (newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice - 1).getEmpty() == true) {
                     newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice - 1).addChip(playerColour);
                     displayBoard();
+                    horizontalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
                     break;
-                    //horizontalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
+
                 }
                 // Triggers when defaultRow 0 is reached and the column(user's chosen space) is full
                 if (defaultRow == 0 && newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice - 1).getEmpty() == false) {
                     fullColumnCounter += 1;
                     // If fullColumnCounter = 7, call the gameDraw method? (to be added)
-                    String columnFullMessage = "Sorry, looks like that column is full. Please pick another column";
+                    String columnFullMessage = "Sorry, looks like that column is full. Please pick another column! ";
                     JOptionPane.showMessageDialog(null, columnFullMessage, "Column Full", JOptionPane.ERROR_MESSAGE);
                     if (playerNumber == 1) {
                         playerOneChoice();
@@ -165,6 +168,7 @@ public class GameLogic {
         }
     }
 
+    // Causing crash, index out of bounds?
     // Check the row that the player just placed on to see if there are 4 of their colours in a row
     public void horizontalCheckForMatch(int theDefaultRow, int thePlayerChoice, String thePlayerColour) {
 
@@ -174,12 +178,13 @@ public class GameLogic {
         rowContents = rowContents + newGame.getRows().get(theDefaultRow).getRowSpaces().get(rowSpace).whatIsInTheSpace();
 
         // Loop until we reach the end of the row
-        while (rowSpace < newGame.getRows().get(theDefaultRow).getRowSpaces().size()) {
+        while (rowSpace < newGame.getRows().get(theDefaultRow).getRowSpaces().size() - 1) {
             rowSpace += 1;
             rowContents = rowContents + newGame.getRows().get(theDefaultRow).getRowSpaces().get(rowSpace).whatIsInTheSpace();
         }
-        if (rowContents.contains(thePlayerColour+thePlayerColour+thePlayerColour+thePlayerColour)) {
+        if (rowContents.contains(""+thePlayerColour+thePlayerColour+thePlayerColour+thePlayerColour+"")) {
             // Run playerWins(playerColour)
+            JOptionPane.showMessageDialog(null, thePlayerColour+" wins!");
         }
     }
 
