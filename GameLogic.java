@@ -118,12 +118,12 @@ public class GameLogic {
             newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).addChip(playerColour);
         }
         else {
-            while (defaultRow > 0) {
+            while (defaultRow >= 0) {
                 defaultRow -= 1;
                 if (newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).getEmpty() == true) {
                     newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).addChip(playerColour);
                 }
-                if (defaultRow == 0) {
+                if (defaultRow == 0 && newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice).getEmpty() == false) {
                     String columnFullMessage = "Sorry, looks like that column is full. Please pick another column";
                     JOptionPane.showMessageDialog(null, columnFullMessage, "Column Full", JOptionPane.ERROR_MESSAGE);
                     if (playerNumber == 1) {
