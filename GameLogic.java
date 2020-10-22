@@ -168,31 +168,35 @@ public class GameLogic {
         }
     }
 
-    // Causing crash, index out of bounds?
     // Check the row that the player just placed on to see if there are 4 of their colours in a row
     public void horizontalCheckForMatch(int theDefaultRow, int thePlayerChoice, String thePlayerColour) {
 
         String rowContents = "";
         int rowSpace = 0;
 
-        rowContents = rowContents + newGame.getRows().get(theDefaultRow).getRowSpaces().get(rowSpace).whatIsInTheSpace();
+        for (Space tempSpace : newGame.getRows().get(theDefaultRow).getRowSpaces()) {
+            rowContents = rowContents + tempSpace.whatIsInTheSpace();
+        }
+
+        System.out.println(rowContents);
+
+        //rowContents = rowContents + newGame.getRows().get(theDefaultRow).getRowSpaces().get(rowSpace).whatIsInTheSpace();
 
         // Loop until we reach the end of the row
-        while (rowSpace < newGame.getRows().get(theDefaultRow).getRowSpaces().size() - 1) {
-            rowSpace += 1;
+        /*while (rowSpace < newGame.getRows().get(theDefaultRow).getRowSpaces().size() - 1) {
             rowContents = rowContents + newGame.getRows().get(theDefaultRow).getRowSpaces().get(rowSpace).whatIsInTheSpace();
+            rowSpace++;
         }
-        if (rowContents.contains(""+thePlayerColour+thePlayerColour+thePlayerColour+thePlayerColour+"")) {
+        System.out.println(rowContents);
+        if (rowContents.contains("RRRR") || rowContents.contains("YYYY")) {
             // Run playerWins(playerColour)
             JOptionPane.showMessageDialog(null, thePlayerColour+" wins!");
-        }
+        }*/
     }
 
     // Activate if column counter reaches 7 (NUMOFCOLUMNS) to declare draw since no other moves are possible
     public void gameDraw() {
     }
-
-
 
 
     //

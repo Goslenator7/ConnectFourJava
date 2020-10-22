@@ -35,14 +35,11 @@ public class Space {
 
     public String whatIsInTheSpace() {
         String inTheSpace = "";
-        if (getEmpty()) {
-            inTheSpace = "O";
+        if (getEmpty() == true) {
+            inTheSpace += "O";
         }
-        else if (getChip().getChipColour() == "Red") {
-            inTheSpace = "R";
-        }
-        else if (getChip().getChipColour() == "Yellow") {
-            inTheSpace = "Y";
+        else if (getEmpty() == false) {
+            inTheSpace += aChip.getChipColour();
         }
         return inTheSpace;
     }
