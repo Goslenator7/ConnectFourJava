@@ -140,6 +140,7 @@ public class GameLogic {
             newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice - 1).addChip(playerColour);
             displayBoard();
             horizontalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
+            //verticalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
         }
         else {
             while (defaultRow > 0) {
@@ -148,6 +149,7 @@ public class GameLogic {
                     newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice - 1).addChip(playerColour);
                     displayBoard();
                     horizontalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
+                    //verticalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
                     break;
 
                 }
@@ -172,7 +174,6 @@ public class GameLogic {
     public void horizontalCheckForMatch(int theDefaultRow, int thePlayerChoice, String thePlayerColour) {
 
         String rowContents = "";
-        int rowSpace = 0;
 
         for (Space tempSpace : newGame.getRows().get(theDefaultRow).getRowSpaces()) {
             rowContents = rowContents + tempSpace.whatIsInTheSpace();
@@ -186,10 +187,22 @@ public class GameLogic {
 
     public void verticalCheckForMatch(int theDefaultRow, int thePlayerChoice, String thePlayerColour) {
 
+        String columnContents = "";
+        String spaceContent;
+
+        for (int i = 0; i < getNUMOFROWS(); i++) {
+            for (Row tempRow : newGame.getRows()) {
+                spaceContent = newGame.getRows().get(theDefaultRow).getRowSpaces().get(thePlayerChoice).whatIsInTheSpace();
+                columnContents = columnContents + spaceContent;
+            }
+        }
+        if (columnContents.contains("RRRR") || columnContents.contains("YYYY")) {
+            JOptionPane.showMessageDialog(null, thePlayerColour+" wins!");
+        }
     }
 
     public void diagonalCheckForMatch(int theDefaultRow, int thePlayerChoice, String thePlayerColour) {
-        
+
     }
 
 
