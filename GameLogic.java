@@ -1,4 +1,7 @@
 import javax.swing.*;
+import java.text.ParsePosition;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameLogic {
 
@@ -6,6 +9,7 @@ public class GameLogic {
     private String playerTwoName;
     private String playerOneColour;
     private String playerTwoColour;
+    String columnContents;
     private final int NUMOFROWS = 6;
     private final int NUMOFCOLUMNS = 7;
     private int fullColumnCounter = 0;
@@ -110,8 +114,16 @@ public class GameLogic {
 
         playerOneColumnChoice = Integer.parseInt(JOptionPane.showInputDialog(playerOneName+", which column number would you like to place your chip in?"));
 
-        // Call space check method, passing player's column choice and chip colour
-        checkIfChoiceIsFull(playerOneColumnChoice, playerOneColour, playerNumber);
+        // Make sure user column is on the game board
+        if (playerOneColumnChoice < 1 || playerOneColumnChoice > 7) {
+            String outOfBoundsMessage = "Sorry, the column you picked is not on the game board. Please try again.";
+            JOptionPane.showMessageDialog(null, outOfBoundsMessage, "Out of Bounds", JOptionPane.ERROR_MESSAGE);
+            playerTwoChoice();
+        }
+        else {
+            // Call space check method, passing player's column choice and chip colour
+            checkIfChoiceIsFull(playerOneColumnChoice, playerOneColour, playerNumber);
+        }
     }
 
     // Get Player two's choice of column to place chip
@@ -123,8 +135,16 @@ public class GameLogic {
 
         playerTwoColumnChoice = Integer.parseInt(JOptionPane.showInputDialog(playerTwoName+", which column number would you like to place your chip in?"));
 
-        // Call space check method, passing player's column choice and chip colour
-        checkIfChoiceIsFull(playerTwoColumnChoice, playerTwoColour, playerNumber);
+        // Make sure user column is on the game board
+        if (playerTwoColumnChoice < 1 || playerTwoColumnChoice > 7) {
+            String outOfBoundsMessage = "Sorry, the column you picked is not on the game board. Please try again.";
+            JOptionPane.showMessageDialog(null, outOfBoundsMessage, "Out of Bounds", JOptionPane.ERROR_MESSAGE);
+            playerTwoChoice();
+        }
+        else {
+            // Call space check method, passing player's column choice and chip colour
+            checkIfChoiceIsFull(playerTwoColumnChoice, playerTwoColour, playerNumber);
+        }
     }
 
     // Get the player's chosen column number, their colour and their number (1 or 2)
@@ -140,7 +160,7 @@ public class GameLogic {
             newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice - 1).addChip(playerColour);
             displayBoard();
             horizontalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
-            //verticalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
+            verticalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
         }
         else {
             while (defaultRow > 0) {
@@ -149,9 +169,8 @@ public class GameLogic {
                     newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice - 1).addChip(playerColour);
                     displayBoard();
                     horizontalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
-                    //verticalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
+                    verticalCheckForMatch(defaultRow, thePlayerChoice, playerColour);
                     break;
-
                 }
                 // Triggers when defaultRow 0 (top row) is reached and the column(user's chosen space) is full
                 if (defaultRow == 0 && newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice - 1).getEmpty() == false) {
@@ -182,23 +201,28 @@ public class GameLogic {
             JOptionPane.showMessageDialog(null, thePlayerColour+" wins!");
         }
 
-        System.out.println(rowContents);
+        //System.out.println(rowContents);
     }
 
-    public void verticalCheckForMatch(int theDefaultRow, int thePlayerChoice, String thePlayerColour) {
 
-        String columnContents = "";
+
+    public void verticalCheckForMatch(int theDefaultRow, int thePlayerChoice, String thePlayerColour) {
         String spaceContent;
 
-        for (int i = 0; i < getNUMOFROWS(); i++) {
-            for (Row tempRow : newGame.getRows()) {
-                spaceContent = newGame.getRows().get(theDefaultRow).getRowSpaces().get(thePlayerChoice).whatIsInTheSpace();
-                columnContents = columnContents + spaceContent;
-            }
+
+        // Set spaceContent to whatever is in the space ("R" or "Y" or "0")
+        // theDefaultRow = defaultRow inherited from checkIfChoiceIsFull method
+        for (Row row : newGame.getRows()) {
+            int rowIndex = newGame.getRows().indexOf(row);
+            spaceContent = newGame.getRows().get(rowIndex).getRowSpaces().get(thePlayerChoice - 1).whatIsInTheSpace();
+            columnContents += spaceContent;
         }
+
         if (columnContents.contains("RRRR") || columnContents.contains("YYYY")) {
             JOptionPane.showMessageDialog(null, thePlayerColour+" wins!");
         }
+
+        System.out.println(columnContents);
     }
 
     public void diagonalCheckForMatch(int theDefaultRow, int thePlayerChoice, String thePlayerColour) {
