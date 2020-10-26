@@ -226,10 +226,11 @@ public class GameLogic {
     }
 
     public void diagonalCheckForMatch(int theDefaultRow, int thePlayerChoice, String thePlayerColour) {
-        int x = thePlayerChoice;
+        // These variables will represent the point we are at on the board eg. (5(x), 6(y) = 5th space, bottom row
+        int x = thePlayerChoice - 1;
         int y = theDefaultRow;
 
-        
+
     }
 
 
