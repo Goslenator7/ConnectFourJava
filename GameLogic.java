@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.text.ParsePosition;
 import java.util.ArrayList;
-import java.util.List;
 
 public class GameLogic {
 
@@ -191,17 +190,17 @@ public class GameLogic {
 
     // Check the row that the player just placed on to see if there are 4 of their colours in a row
     public void horizontalCheckForMatch(int theDefaultRow, int thePlayerChoice, String thePlayerColour) {
-
         String rowContents = "";
 
+        // For every space in the row the player just played in, get the contents
+        // add the contents of each space to a string rowContents
         for (Space tempSpace : newGame.getRows().get(theDefaultRow).getRowSpaces()) {
             rowContents = rowContents + tempSpace.whatIsInTheSpace();
         }
+        // If there are 4 in a row of either R or Y in rowContents string, then that player wins the game
         if (rowContents.contains("RRRR") || rowContents.contains("YYYY")) {
             JOptionPane.showMessageDialog(null, thePlayerColour+" wins!");
         }
-
-        //System.out.println(rowContents);
     }
 
 
@@ -209,29 +208,34 @@ public class GameLogic {
     public void verticalCheckForMatch(int theDefaultRow, int thePlayerChoice, String thePlayerColour) {
         String spaceContent;
 
-
         // Set spaceContent to whatever is in the space ("R" or "Y" or "0")
         // theDefaultRow = defaultRow inherited from checkIfChoiceIsFull method
         for (Row row : newGame.getRows()) {
+            // assign the index of the current row in foreach loop to variable rowIndex
             int rowIndex = newGame.getRows().indexOf(row);
+            // use rowIndex variable to get the contents of the user's chosen row space on that row
             spaceContent = newGame.getRows().get(rowIndex).getRowSpaces().get(thePlayerChoice - 1).whatIsInTheSpace();
+            // Add the row space content to columnContents string
             columnContents += spaceContent;
         }
 
+        // Check the entire columnContents string to see if 4 Rs or Ys appear in a row. If they do, that means the current player wins
         if (columnContents.contains("RRRR") || columnContents.contains("YYYY")) {
             JOptionPane.showMessageDialog(null, thePlayerColour+" wins!");
         }
-
-        System.out.println(columnContents);
     }
 
     public void diagonalCheckForMatch(int theDefaultRow, int thePlayerChoice, String thePlayerColour) {
+        int x = thePlayerChoice;
+        int y = theDefaultRow;
 
+        
     }
 
 
-        // Activate if column counter reaches 7 (NUMOFCOLUMNS) to declare draw since no other moves are possible
+    // Activate if column counter reaches 7 (NUMOFCOLUMNS) to declare draw since no other moves are possible
     public void gameDraw() {
+
     }
 
 
