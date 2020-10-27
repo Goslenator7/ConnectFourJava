@@ -28,26 +28,12 @@ public class GameLogic {
         setNewGame(newGame);
         playerNames();
         playerColours();
-        // Should start the loop to play the game here!
-        for (int i = 0; i < 7; i++) {
+        // Start the loop to play the game here
+        // 42 possible plays on board, so loop for 44 (extra headroom)
+        for (int i = 0; i < 44; i++) {
             playerOneChoice();
             playerTwoChoice();
         }
-
-
-        /*// Test if the rows have been added successfully
-        System.out.println(newGame.getRows().size());
-
-        // Test number of spaces in each row
-
-        for (Row tempRow : newGame.getRows()) {
-            System.out.print("");
-            //"\t"+tempRow.getRowSpaces().size()
-            for (Space tempSpace : tempRow.getRowSpaces()) {
-                System.out.print(tempSpace.getChip()+"\t");
-            }
-            System.out.print("\n");
-        }*/
     }
 
     // Displays the current layout of the board
@@ -111,17 +97,14 @@ public class GameLogic {
         // Get the player's colour and assign to String to pass
         String playerOneColour = getPlayerOneColour();
 
-        playerOneColumnChoice = Integer.parseInt(JOptionPane.showInputDialog(playerOneName+", which column number would you like to place your chip in?"));
-
-        // Make sure user column is on the game board
-        if (playerOneColumnChoice < 1 || playerOneColumnChoice > 7) {
-            String outOfBoundsMessage = "Sorry, the column you picked is not on the game board. Please try again.";
-            JOptionPane.showMessageDialog(null, outOfBoundsMessage, "Out of Bounds", JOptionPane.ERROR_MESSAGE);
-            playerTwoChoice();
-        }
-        else {
-            // Call space check method, passing player's column choice and chip colour
+        // Validate user input as a number and is on the board
+        try {
+            playerOneColumnChoice = Integer.parseInt(JOptionPane.showInputDialog(playerOneName+", which column number would you like to place your chip in?"));
             checkIfChoiceIsFull(playerOneColumnChoice, playerOneColour, playerNumber);
+        }
+        catch(Exception e) {
+            String errorMessage = "Please enter a valid number input!";
+            JOptionPane.showMessageDialog(null, errorMessage, "Input Issue", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -132,23 +115,21 @@ public class GameLogic {
         int playerNumber = 2;
         String playerTwoColour = getPlayerTwoColour();
 
-        playerTwoColumnChoice = Integer.parseInt(JOptionPane.showInputDialog(playerTwoName+", which column number would you like to place your chip in?"));
-
-        // Make sure user column is on the game board
-        if (playerTwoColumnChoice < 1 || playerTwoColumnChoice > 7) {
-            String outOfBoundsMessage = "Sorry, the column you picked is not on the game board. Please try again.";
-            JOptionPane.showMessageDialog(null, outOfBoundsMessage, "Out of Bounds", JOptionPane.ERROR_MESSAGE);
-            playerTwoChoice();
-        }
-        else {
-            // Call space check method, passing player's column choice and chip colour
+        // Validate user input as a number and is on the board
+        try {
+            playerTwoColumnChoice = Integer.parseInt(JOptionPane.showInputDialog(playerTwoName + ", which column number would you like to place your chip in?"));
             checkIfChoiceIsFull(playerTwoColumnChoice, playerTwoColour, playerNumber);
+        }
+        catch(Exception e) {
+            String errorMessage = "Please enter a valid number input!";
+            JOptionPane.showMessageDialog(null, errorMessage, "Input Issue", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     // Get the player's chosen column number, their colour and their number (1 or 2)
     // Check the player's chosen space on the row (their chosen column number) to see if empty or not
-    // If it is empty, place a chip of their colour. Otherwise, minus one from the default row to move a row up on the board
+    // If it is empty, place a chip of their colour. Otherwise, minus one from the default row to move a row up on the board.
+    // Call methods to check for a match in surrounding area
     // Repeat this process until default row is 0 (top of the board is reached)
     // At this point, if space in row 0 is full tell the player that column is full
     // and call the method to pick another column number using their playerNumber
@@ -174,7 +155,11 @@ public class GameLogic {
                 // Triggers when defaultRow 0 (top row) is reached and the column(user's chosen space) is full
                 if (defaultRow == 0 && newGame.getRows().get(defaultRow).getRowSpaces().get(thePlayerChoice - 1).getEmpty() == false) {
                     fullColumnCounter += 1;
-                    // If fullColumnCounter = 7, call the gameDraw method? (to be added)
+                    // If fullColumnCounter = 7, all columns are full and the match is a draw so call the gameDraw method
+                    if (fullColumnCounter == 7) {
+                        gameDraw();
+                    }
+
                     String columnFullMessage = "Sorry, looks like that column is full. Please pick another column! ";
                     JOptionPane.showMessageDialog(null, columnFullMessage, "Column Full", JOptionPane.ERROR_MESSAGE);
                     if (playerNumber == 1) {
@@ -200,11 +185,20 @@ public class GameLogic {
         // If there are 4 in a row of either R or Y in rowContents string, then that player wins the game
         if (rowContents.contains("RRRR") || rowContents.contains("YYYY")) {
             JOptionPane.showMessageDialog(null, thePlayerColour+" wins!");
+
+            int choice = JOptionPane.showConfirmDialog(null, "Want to play again?", thePlayerColour+" wins!", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                startGame();
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Bye bye!", "Thanks for Playing!", JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
+            }
         }
     }
 
 
-
+    // Check the column that the player just played in to see if there are 4 in a row
     public void verticalCheckForMatch(int theDefaultRow, int thePlayerChoice, String thePlayerColour) {
         String spaceContent;
 
@@ -222,6 +216,15 @@ public class GameLogic {
         // Check the entire columnContents string to see if 4 Rs or Ys appear in a row. If they do, that means the current player wins
         if (columnContents.contains("RRRR") || columnContents.contains("YYYY")) {
             JOptionPane.showMessageDialog(null, thePlayerColour+" wins!");
+
+            int choice = JOptionPane.showConfirmDialog(null, "Want to play again?", thePlayerColour+" wins!", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                startGame();
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Bye bye!", "Thanks for Playing!", JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
+            }
         }
     }
 
@@ -235,8 +238,17 @@ public class GameLogic {
 
 
     // Activate if column counter reaches 7 (NUMOFCOLUMNS) to declare draw since no other moves are possible
+    // Ask user if they want to play again. if yes, start program again. If no, end the program
     public void gameDraw() {
-
+        String drawMessage = "Looks like there are no more possible moves! It's a draw! \n Want to play again?";
+        int choice = JOptionPane.showConfirmDialog(null, drawMessage, "It's a draw!", JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            startGame();
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Bye bye!", "Thanks for playing!", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
+        }
     }
 
 
