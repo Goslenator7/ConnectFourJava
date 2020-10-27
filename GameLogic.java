@@ -49,6 +49,11 @@ public class GameLogic {
         System.out.println("\n");
     }
 
+    // Used to clear the board in event of a new game
+    public void resetBoard() {
+
+    }
+
     //
     //
     // Get the names of the players and assign them to a colour of disk
@@ -89,6 +94,12 @@ public class GameLogic {
         }
     }
 
+    //
+    //
+    // Get the player's choices for columns
+    //
+    //
+
     // Get Player one's choice of column to place chip
     public void playerOneChoice() {
 
@@ -125,6 +136,14 @@ public class GameLogic {
             JOptionPane.showMessageDialog(null, errorMessage, "Input Issue", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    //
+    //
+    // Check the player's choice of placement. The following methods check for already placed chips, and horizontal and vertical matches,
+    // as well as if there is a draw
+    //
+    //
+
 
     // Get the player's chosen column number, their colour and their number (1 or 2)
     // Check the player's chosen space on the row (their chosen column number) to see if empty or not
@@ -228,6 +247,7 @@ public class GameLogic {
         }
     }
 
+    // Will return to finish
     public void diagonalCheckForMatch(int theDefaultRow, int thePlayerChoice, String thePlayerColour) {
         // These variables will represent the point we are at on the board eg. (5(x), 6(y) = 5th space, bottom row
         int x = thePlayerChoice - 1;
